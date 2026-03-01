@@ -43,6 +43,6 @@ public class Persona {
     @Schema(description = "Occupation information including type and specific details", requiredMode = Schema.RequiredMode.REQUIRED)
     private Occupation occupation;
 
-    @Schema(description = "Metadata information", accessMode = Schema.AccessMode.READ_ONLY)
-    private Instant meta;
+    @Schema(description = "Timestamp when the persona was created", accessMode = Schema.AccessMode.READ_ONLY)
+    private Instant createdAt;
 }

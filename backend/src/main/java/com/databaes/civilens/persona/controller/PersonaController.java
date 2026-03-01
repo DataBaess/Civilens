@@ -1,6 +1,7 @@
 package com.databaes.civilens.persona.controller;
 
 import com.databaes.civilens.persona.model.Persona;
+import com.databaes.civilens.persona.service.PersonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -21,6 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/persona")
 @Tag(name = "Persona Management", description = "APIs for managing persona data")
 public class PersonaController {
+
+    private final PersonaService personaServiceImpl;
+
+    public PersonaController(PersonaService personaServiceImpl) {
+        this.personaServiceImpl = personaServiceImpl;
+    }
 
     @PostMapping
     @Operation(summary = "Create a new persona", description = "Creates a new persona with demographic, economic, geographic, and occupation information")
@@ -147,6 +154,7 @@ public class PersonaController {
                             }
                             """)
             })) @Valid @RequestBody Persona persona) {
+        personaServiceImpl.createPersona(persona);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
