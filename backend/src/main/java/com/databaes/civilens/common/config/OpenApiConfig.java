@@ -19,9 +19,9 @@ public class OpenApiConfig {
     public OpenAPI civilensOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Civilens Persona API")
+                        .title("Civilens API")
                         .description(
-                                "Privacy-first persona intake service for matching individuals to government schemes.")
+                                "Privacy-first persona intake and scheme management service for matching individuals to government schemes.")
                         .version("1.0.0"))
                 .servers(List.of(
                         new Server()
