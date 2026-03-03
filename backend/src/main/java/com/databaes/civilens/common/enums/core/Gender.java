@@ -1,5 +1,5 @@
 package com.databaes.civilens.common.enums.core;
 
 public enum Gender {
-    MALE, FEMALE, OTHER
+    ANY, MALE, FEMALE, OTHER, NONE
 }

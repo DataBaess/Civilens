@@ -1,8 +1,10 @@
 package com.databaes.civilens.common.enums.core;
 
 public enum OccupationType {
+    ANY,
     FARMER,
     STUDENT,
     WORKER,
-    SELF_EMPLOYED
+    SELF_EMPLOYED,
+    NONE
 }

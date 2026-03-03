@@ -1,6 +1,7 @@
 package com.databaes.civilens.common.enums.core;
 
 public enum IndianState {
+    ANY,
     ANDHRA_PRADESH,
     ARUNACHAL_PRADESH,
     ASSAM,
@@ -36,5 +37,6 @@ public enum IndianState {
     JAMMU_AND_KASHMIR,
     LADAKH,
     LAKSHADWEEP,
-    PUDUCHERRY
+    PUDUCHERRY,
+    NONE
 }
