@@ -1,10 +1,9 @@
 package com.databaes.civilens.detect.controller;
 
+import com.databaes.civilens.detect.dto.DetectResponse;
 import com.databaes.civilens.detect.service.DetectService;
 import com.databaes.civilens.persona.model.Persona;
-import com.databaes.civilens.scheme.model.Scheme;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @Tag(name = "Scheme Detection", description = "APIs for detecting eligible schemes from an external engine")
@@ -32,14 +29,13 @@ public class DetectController {
     @PostMapping("/detect")
     @Operation(summary = "Detect schemes", description = "Sends persona details to an external detect API and returns matched schemes")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Schemes detected successfully", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = Scheme.class)))),
+            @ApiResponse(responseCode = "200", description = "Schemes detected successfully", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = DetectResponse.class))),
             @ApiResponse(responseCode = "400", description = "Invalid persona payload", content = @Content),
             @ApiResponse(responseCode = "502", description = "External detect API failed", content = @Content),
             @ApiResponse(responseCode = "503", description = "External detect API unreachable", content = @Content)
     })
-    public ResponseEntity<List<Scheme>> detect(
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Persona used for scheme detection", required = true)
-            @Valid @RequestBody Persona persona) {
+    public ResponseEntity<DetectResponse> detect(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Persona used for scheme detection", required = true) @Valid @RequestBody Persona persona) {
         return ResponseEntity.ok(detectService.detectSchemes(persona));
     }
 }
