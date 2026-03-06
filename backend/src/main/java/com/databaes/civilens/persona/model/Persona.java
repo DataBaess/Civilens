@@ -4,16 +4,12 @@ import com.databaes.civilens.common.enums.core.Language;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 
 @Data
-@Document(collection = "personas")
 public class Persona {
 
-    @Id
     private String id;
 
     @NotNull(message = "Language preference is required")
