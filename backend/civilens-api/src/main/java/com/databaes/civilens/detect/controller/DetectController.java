@@ -3,6 +3,7 @@ package com.databaes.civilens.detect.controller;
 import com.databaes.civilens.detect.dto.DetectResponse;
 import com.databaes.civilens.detect.service.DetectService;
 import com.databaes.civilens.persona.model.Persona;
+import io.github.sathwikhbhat.apiexecutiontracker.annotation.TrackExecutionTime;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@TrackExecutionTime
 @RestController
 @Tag(name = "Scheme Detection", description = "APIs for detecting eligible schemes from an external engine")
 public class DetectController {
