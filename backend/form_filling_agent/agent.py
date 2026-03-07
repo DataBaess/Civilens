@@ -4,14 +4,9 @@ from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
-# Dynamically locate the .env file in the project root
-teammate_env = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
-local_env = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '.env'))
-
-if os.path.exists(teammate_env):
-    load_dotenv(dotenv_path=teammate_env)
-else:
-    load_dotenv(dotenv_path=local_env)
+# Define standard relative path to the root .env file for the repository
+env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+load_dotenv(dotenv_path=env_path)
 
 def fill_form_with_gemini(persona_data: dict, empty_form_schema: dict) -> dict:
     """
