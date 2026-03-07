@@ -88,7 +88,44 @@ const PersonaBuilder = () => {
         }));
     };
 
+    const isStep1Valid = () => {
+        const { age, gender, category, familySize } = formData.demographics;
+        return !!age && !!gender && !!category && !!familySize;
+    };
+
+    const isStep2Valid = () => {
+        const { incomeBracket } = formData.economic;
+        const { state, district, areaType } = formData.geographic;
+        return !!incomeBracket && !!state && !!district && !!areaType;
+    };
+
+    const isStep3Valid = () => {
+        const { type, details } = formData.occupation;
+        if (!type) return false;
+
+        switch (type) {
+            case 'FARMER':
+                return !!details.landHolding?.value &&
+                    !!details.landHolding?.unit &&
+                    !!details.irrigationType &&
+                    !!details.primaryCropCategory;
+            case 'STUDENT':
+                return !!details.educationLevel && !!details.institutionType && !!details.stream;
+            case 'WORKER':
+                return !!details.employmentCategory && !!details.industryType;
+            case 'SELF_EMPLOYED':
+                return !!details.sector &&
+                    !!details.yearsOperational &&
+                    !!details.enterpriseSize &&
+                    !!details.annualTurnoverBracket;
+            default:
+                return false;
+        }
+    };
+
     const handleNext = () => {
+        if (currentStep === 1 && !isStep1Valid()) return;
+        if (currentStep === 2 && !isStep2Valid()) return;
         if (currentStep < 3) setCurrentStep(prev => prev + 1);
     };
 
@@ -435,11 +472,19 @@ const PersonaBuilder = () => {
                             <ChevronLeft size={18} className="mr-1" /> Back
                         </button>
                         {currentStep < 3 ? (
-                            <button onClick={handleNext} className="flex items-center bg-slate-900 hover:bg-black text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-all shadow-md">
+                            <button
+                                onClick={handleNext}
+                                disabled={currentStep === 1 ? !isStep1Valid() : !isStep2Valid()}
+                                className={`flex items-center px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${(currentStep === 1 ? !isStep1Valid() : !isStep2Valid()) ? 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none' : 'bg-slate-900 hover:bg-black text-white shadow-md'}`}
+                            >
                                 Next Step <ChevronRight size={18} className="ml-1" />
                             </button>
                         ) : (
-                            <button onClick={handleSubmit} disabled={isSubmitting} className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-2.5 rounded-lg text-sm font-bold transition-all shadow-md">
+                            <button
+                                onClick={handleSubmit}
+                                disabled={!isStep3Valid() || isSubmitting}
+                                className={`flex items-center px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${!isStep3Valid() || isSubmitting ? 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none' : 'bg-primary-600 hover:bg-primary-700 text-white shadow-md'}`}
+                            >
                                 Create Persona <Sparkles size={18} className="ml-2" />
                             </button>
                         )}
