@@ -159,6 +159,9 @@ const PersonaBuilder = () => {
             const data = await response.json();
             console.log('Detection Results:', data);
 
+            // Persist the user's successfully created persona securely in localStorage
+            localStorage.setItem('civilens_persona', JSON.stringify(payload));
+
             setTimeout(() => {
                 navigate('/schemes', { state: { persona: payload, schemes: data.schemes || [] } });
             }, 1500);
@@ -224,14 +227,45 @@ const PersonaBuilder = () => {
                             <label htmlFor="bplStatus" className="text-sm font-medium text-slate-700">Below Poverty Line (BPL) Status Verification</label>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">State</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">State / Union Territory</label>
                             <select value={formData.geographic.state} onChange={(e) => handleNestedChange('geographic', 'state', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none">
-                                <option value="">Select State</option>
-                                <option value="MAHARASHTRA">Maharashtra</option>
+                                <option value="">Select State/UT</option>
+                                <option value="ANDAMAN_AND_NICOBAR">Andaman and Nicobar Islands</option>
+                                <option value="ANDHRA_PRADESH">Andhra Pradesh</option>
+                                <option value="ARUNACHAL_PRADESH">Arunachal Pradesh</option>
+                                <option value="ASSAM">Assam</option>
+                                <option value="BIHAR">Bihar</option>
+                                <option value="CHANDIGARH">Chandigarh</option>
+                                <option value="CHHATTISGARH">Chhattisgarh</option>
+                                <option value="DADRA_AND_NAGAR_HAVELI">Dadra and Nagar Haveli and Daman and Diu</option>
                                 <option value="DELHI">Delhi</option>
-                                <option value="KARNATAKA">Karnataka</option>
-                                <option value="TAMIL_NADU">Tamil Nadu</option>
+                                <option value="GOA">Goa</option>
                                 <option value="GUJARAT">Gujarat</option>
+                                <option value="HARYANA">Haryana</option>
+                                <option value="HIMACHAL_PRADESH">Himachal Pradesh</option>
+                                <option value="JAMMU_AND_KASHMIR">Jammu and Kashmir</option>
+                                <option value="JHARKHAND">Jharkhand</option>
+                                <option value="KARNATAKA">Karnataka</option>
+                                <option value="KERALA">Kerala</option>
+                                <option value="LADAKH">Ladakh</option>
+                                <option value="LAKSHADWEEP">Lakshadweep</option>
+                                <option value="MADHYA_PRADESH">Madhya Pradesh</option>
+                                <option value="MAHARASHTRA">Maharashtra</option>
+                                <option value="MANIPUR">Manipur</option>
+                                <option value="MEGHALAYA">Meghalaya</option>
+                                <option value="MIZORAM">Mizoram</option>
+                                <option value="NAGALAND">Nagaland</option>
+                                <option value="ODISHA">Odisha</option>
+                                <option value="PUDUCHERRY">Puducherry</option>
+                                <option value="PUNJAB">Punjab</option>
+                                <option value="RAJASTHAN">Rajasthan</option>
+                                <option value="SIKKIM">Sikkim</option>
+                                <option value="TAMIL_NADU">Tamil Nadu</option>
+                                <option value="TELANGANA">Telangana</option>
+                                <option value="TRIPURA">Tripura</option>
+                                <option value="UTTAR_PRADESH">Uttar Pradesh</option>
+                                <option value="UTTARAKHAND">Uttarakhand</option>
+                                <option value="WEST_BENGAL">West Bengal</option>
                             </select>
                         </div>
                         <div>
