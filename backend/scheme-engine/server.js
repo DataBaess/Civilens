@@ -7,7 +7,15 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.join(__dirname, "../../../.env") });
+// Support both the user's nested structure and the standard cloned repo structure
+const teammateEnvPath = path.join(__dirname, "../../.env");
+const localEnvPath = path.join(__dirname, "../../../.env");
+
+if (fs.existsSync(teammateEnvPath)) {
+  dotenv.config({ path: teammateEnvPath });
+} else {
+  dotenv.config({ path: localEnvPath });
+}
 
 const app = express();
 app.use(express.json());
