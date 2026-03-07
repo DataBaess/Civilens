@@ -16,9 +16,9 @@ public class DetectClientConfig {
 
     @Bean
     RestClient detectRestClient(RestClient.Builder builder,
-                                @Value("${external.detect.base-url}") String detectBaseUrl,
-                                @Value("${external.detect.connect-timeout-ms:3000}") int connectTimeoutMs,
-                                @Value("${external.detect.read-timeout-ms:8000}") int readTimeoutMs) {
+            @Value("${app.scheme-engine.base-url}") String detectBaseUrl,
+            @Value("${app.scheme-engine.connect-timeout-ms:3000}") int connectTimeoutMs,
+            @Value("${app.scheme-engine.read-timeout-ms:8000}") int readTimeoutMs) {
 
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
         requestFactory.setConnectTimeout(connectTimeoutMs);

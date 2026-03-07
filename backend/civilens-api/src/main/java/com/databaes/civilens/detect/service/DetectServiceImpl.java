@@ -25,7 +25,7 @@ public class DetectServiceImpl implements DetectService {
     private final String detectEndpoint;
 
     public DetectServiceImpl(RestClient restClient,
-            @Value("${external.detect.endpoint:/detect}") String detectEndpoint) {
+            @Value("${app.scheme-engine.vector-search-endpoint:/detect}") String detectEndpoint) {
         this.restClient = restClient;
         this.detectEndpoint = detectEndpoint;
     }
